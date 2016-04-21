@@ -4030,3 +4030,32 @@
 #define LN_aes_256_cbc_hmac_sha1		"aes-256-cbc-hmac-sha1"
 #define NID_aes_256_cbc_hmac_sha1		918
 
+#define SN_SM		"SM"
+#define NID_SM		920
+#define OBJ_SM		OBJ_member_body,156L,197L,1L
+
+#define SN_sm3		"SM3"
+#define LN_sm3		"sm3"
+#define NID_sm3		921
+#define OBJ_sm3		OBJ_SM,401L
+
+#define SN_sm4_ecb		"SM4-ECB"
+#define LN_sm4_ecb		"sm4-ecb"
+#define NID_sm4_ecb		922
+#define OBJ_sm4_ecb		OBJ_SM,104L,1L
+
+#define SN_sm4_cbc		"SM4-CBC"
+#define LN_sm4_cbc		"sm4-cbc"
+#define NID_sm4_cbc		923
+#define OBJ_sm4_cbc		OBJ_SM,104L,2L
+
+#define SN_sm4_cfb128		"SM4-CFB"
+#define LN_sm4_cfb128		"sm4-cfb"
+#define NID_sm4_cfb128		928
+#define OBJ_sm4_cfb128		OBJ_SM,104L,3L
+
+#define SN_sm4_ofb128		"SM4-OFB"
+#define LN_sm4_ofb128		"sm4-ofb"
+#define NID_sm4_ofb128		929
+#define OBJ_sm4_ofb128		OBJ_SM,104L,4L
+

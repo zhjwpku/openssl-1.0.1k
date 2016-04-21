@@ -917,3 +917,13 @@ aes_128_cbc_hmac_sha1		916
 aes_192_cbc_hmac_sha1		917
 aes_256_cbc_hmac_sha1		918
 rsaesOaep		919
+SM		920
+sm3		921
+sm4_ecb		922
+sm4_cbc		923
+sm4_cfb		924
+sm4_ofb		925
+sms4_cfb128		926
+sms4_ofb128		927
+sm4_cfb128		928
+sm4_ofb128		929

@@ -144,6 +144,7 @@ my $no_rfc3779; my $no_psk; my $no_tlsext; my $no_cms; my $no_capieng;
 my $no_jpake; my $no_srp; my $no_ssl2; my $no_ec2m; my $no_nistp_gcc; 
 my $no_nextprotoneg; my $no_sctp; my $no_srtp;
 my $no_unit_test; my $no_ssl3_method;
+my $no_sm4; my $no_sm3;
 
 my $fips;
 
@@ -206,6 +207,7 @@ foreach (@ARGV, split(/ /, $options))
 	elsif (/^no-md4$/)      { $no_md4=1; }
 	elsif (/^no-md5$/)      { $no_md5=1; }
 	elsif (/^no-sha$/)      { $no_sha=1; }
+	elsif (/^no-sm3$/)      { $no_sm3=1; }
 	elsif (/^no-ripemd$/)   { $no_ripemd=1; }
 	elsif (/^no-mdc2$/)     { $no_mdc2=1; }
 	elsif (/^no-rsa$/)      { $no_rsa=1; }
@@ -216,6 +218,7 @@ foreach (@ARGV, split(/ /, $options))
 	elsif (/^no-ecdh$/) 	{ $no_ecdh=1; }
 	elsif (/^no-hmac$/)	{ $no_hmac=1; }
 	elsif (/^no-aes$/)	{ $no_aes=1; }
+	elsif (/^no-sm4$/)	{ $no_sm4=1; }
 	elsif (/^no-camellia$/)	{ $no_camellia=1; }
 	elsif (/^no-seed$/)     { $no_seed=1; }
 	elsif (/^no-evp$/)	{ $no_evp=1; }
@@ -303,6 +306,7 @@ $crypto.=" crypto/mdc2/mdc2.h" ; # unless $no_mdc2;
 $crypto.=" crypto/sha/sha.h" ; # unless $no_sha;
 $crypto.=" crypto/ripemd/ripemd.h" ; # unless $no_ripemd;
 $crypto.=" crypto/aes/aes.h" ; # unless $no_aes;
+$crypto.=" crypto/sm4/sm4.h" ; # unless $no_sm4;
 $crypto.=" crypto/camellia/camellia.h" ; # unless $no_camellia;
 $crypto.=" crypto/seed/seed.h"; # unless $no_seed;
 
@@ -955,6 +959,7 @@ sub do_defs
 			$a .= ",BF" if($s =~ /EVP_bf/);
 			$a .= ",CAST" if($s =~ /EVP_cast/);
 			$a .= ",DES" if($s =~ /EVP_des/);
+			$a .= ",SM4" if($s =~ /EVP_sm4/);
 			$a .= ",DSA" if($s =~ /EVP_dss/);
 			$a .= ",IDEA" if($s =~ /EVP_idea/);
 			$a .= ",MD2" if($s =~ /EVP_md2/);
@@ -1186,6 +1191,7 @@ sub is_valid
 			if ($keyword eq "ECDH" && $no_ecdh) { return 0; }
 			if ($keyword eq "HMAC" && $no_hmac) { return 0; }
 			if ($keyword eq "AES" && $no_aes) { return 0; }
+			if ($keyword eq "SM4" && $no_sm4) { return 0; }
 			if ($keyword eq "CAMELLIA" && $no_camellia) { return 0; }
 			if ($keyword eq "SEED" && $no_seed) { return 0; }
 			if ($keyword eq "EVP" && $no_evp) { return 0; }

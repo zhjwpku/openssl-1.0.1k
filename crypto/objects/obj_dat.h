@@ -62,12 +62,12 @@
  * [including the GNU Public Licence.]
  */
 
-#define NUM_NID 920
-#define NUM_SN 913
-#define NUM_LN 913
-#define NUM_OBJ 857
+#define NUM_NID 930
+#define NUM_SN 919
+#define NUM_LN 919
+#define NUM_OBJ 863
 
-static const unsigned char lvalues[5974]={
+static const unsigned char lvalues[6020]={
 0x2A,0x86,0x48,0x86,0xF7,0x0D,               /* [  0] OBJ_rsadsi */
 0x2A,0x86,0x48,0x86,0xF7,0x0D,0x01,          /* [  6] OBJ_pkcs */
 0x2A,0x86,0x48,0x86,0xF7,0x0D,0x02,0x02,     /* [ 13] OBJ_md2 */
@@ -919,6 +919,12 @@ static const unsigned char lvalues[5974]={
 0x2A,0x86,0x48,0x86,0xF7,0x0D,0x01,0x01,0x08,/* [5946] OBJ_mgf1 */
 0x2A,0x86,0x48,0x86,0xF7,0x0D,0x01,0x01,0x0A,/* [5955] OBJ_rsassaPss */
 0x2A,0x86,0x48,0x86,0xF7,0x0D,0x01,0x01,0x07,/* [5964] OBJ_rsaesOaep */
+0x2A,0x81,0x1C,0x81,0x45,0x01,               /* [5973] OBJ_SM */
+0x2A,0x81,0x1C,0x81,0x45,0x01,0x83,0x11,     /* [5979] OBJ_sm3 */
+0x2A,0x81,0x1C,0x81,0x45,0x01,0x68,0x01,     /* [5987] OBJ_sm4_ecb */
+0x2A,0x81,0x1C,0x81,0x45,0x01,0x68,0x02,     /* [5995] OBJ_sm4_cbc */
+0x2A,0x81,0x1C,0x81,0x45,0x01,0x68,0x03,     /* [6003] OBJ_sm4_cfb128 */
+0x2A,0x81,0x1C,0x81,0x45,0x01,0x68,0x04,     /* [6011] OBJ_sm4_ofb128 */
 };
 
 static const ASN1_OBJECT nid_objs[NUM_NID]={
@@ -2399,6 +2405,16 @@ static const ASN1_OBJECT nid_objs[NUM_NID]={
 {"AES-256-CBC-HMAC-SHA1","aes-256-cbc-hmac-sha1",
 	NID_aes_256_cbc_hmac_sha1,0,NULL,0},
 {"RSAES-OAEP","rsaesOaep",NID_rsaesOaep,9,&(lvalues[5964]),0},
+{"SM","SM",NID_SM,6,&(lvalues[5973]),0},
+{"SM3","sm3",NID_sm3,8,&(lvalues[5979]),0},
+{"SM4-ECB","sm4-ecb",NID_sm4_ecb,8,&(lvalues[5987]),0},
+{"SM4-CBC","sm4-cbc",NID_sm4_cbc,8,&(lvalues[5995]),0},
+{NULL,NULL,NID_undef,0,NULL,0},
+{NULL,NULL,NID_undef,0,NULL,0},
+{NULL,NULL,NID_undef,0,NULL,0},
+{NULL,NULL,NID_undef,0,NULL,0},
+{"SM4-CFB","sm4-cfb",NID_sm4_cfb128,8,&(lvalues[6003]),0},
+{"SM4-OFB","sm4-ofb",NID_sm4_ofb128,8,&(lvalues[6011]),0},
 };
 
 static const unsigned int sn_objs[NUM_SN]={
@@ -2578,6 +2594,12 @@ static const unsigned int sn_objs[NUM_SN]={
 672,	/* "SHA256" */
 673,	/* "SHA384" */
 674,	/* "SHA512" */
+920,	/* "SM" */
+921,	/* "SM3" */
+923,	/* "SM4-CBC" */
+928,	/* "SM4-CFB" */
+922,	/* "SM4-ECB" */
+929,	/* "SM4-OFB" */
 188,	/* "SMIME" */
 167,	/* "SMIME-CAPS" */
 100,	/* "SN" */
@@ -3416,6 +3438,7 @@ static const unsigned int ln_objs[NUM_LN]={
  2,	/* "RSA Data Security, Inc. PKCS" */
 188,	/* "S/MIME" */
 167,	/* "S/MIME Capabilities" */
+920,	/* "SM" */
 387,	/* "SNMPv2" */
 512,	/* "Secure Electronic Transactions" */
 386,	/* "Security" */
@@ -4188,6 +4211,11 @@ static const unsigned int ln_objs[NUM_LN]={
 52,	/* "signingTime" */
 454,	/* "simpleSecurityObject" */
 496,	/* "singleLevelQuality" */
+921,	/* "sm3" */
+923,	/* "sm4-cbc" */
+928,	/* "sm4-cfb" */
+922,	/* "sm4-ecb" */
+929,	/* "sm4-ofb" */
 16,	/* "stateOrProvinceName" */
 660,	/* "streetAddress" */
 498,	/* "subtreeMaximumQuality" */
@@ -4542,6 +4570,7 @@ static const unsigned int obj_objs[NUM_OBJ]={
 745,	/* OBJ_wap_wsg_idm_ecid_wtls12      2 23 43 1 4 12 */
 804,	/* OBJ_whirlpool                    1 0 10118 3 0 55 */
 124,	/* OBJ_rle_compression              1 1 1 1 666 1 */
+920,	/* OBJ_SM                           1 2 156 197 1 */
 773,	/* OBJ_kisa                         1 2 410 200004 */
 807,	/* OBJ_id_GostR3411_94_with_GostR3410_2001 1 2 643 2 2 3 */
 808,	/* OBJ_id_GostR3411_94_with_GostR3410_94 1 2 643 2 2 4 */
@@ -4636,6 +4665,11 @@ static const unsigned int obj_objs[NUM_OBJ]={
 768,	/* OBJ_camellia_256_ofb128          0 3 4401 5 3 1 9 43 */
 759,	/* OBJ_camellia_256_cfb128          0 3 4401 5 3 1 9 44 */
 437,	/* OBJ_pilot                        0 9 2342 19200300 100 */
+922,	/* OBJ_sm4_ecb                      1 2 156 197 1 104 1 */
+923,	/* OBJ_sm4_cbc                      1 2 156 197 1 104 2 */
+928,	/* OBJ_sm4_cfb128                   1 2 156 197 1 104 3 */
+929,	/* OBJ_sm4_ofb128                   1 2 156 197 1 104 4 */
+921,	/* OBJ_sm3                          1 2 156 197 1 401 */
 776,	/* OBJ_seed_ecb                     1 2 410 200004 1 3 */
 777,	/* OBJ_seed_cbc                     1 2 410 200004 1 4 */
 779,	/* OBJ_seed_cfb128                  1 2 410 200004 1 5 */

@@ -65,6 +65,7 @@ $RET = 0;
 foreach (@ARGV) {
 	if ( /^(-\?|-h|-help)$/ ) {
 	    print STDERR "usage: CA -newcert|-newreq|-newreq-nodes|-newca|-sign|-verify\n";
+	    print STDERR "usage: CA -signcert certfile keyfile|-newcert|-newreq|-newca|-sign|-verify\n";
 	    exit 0;
 	} elsif (/^-newcert$/) {
 	    # create a certificate
@@ -165,6 +166,7 @@ foreach (@ARGV) {
 	} else {
 	    print STDERR "Unknown arg $_\n";
 	    print STDERR "usage: CA -newcert|-newreq|-newreq-nodes|-newca|-sign|-verify\n";
+	    print STDERR "usage: CA -signcert certfile keyfile|-newcert|-newreq|-newca|-sign|-verify\n";
 	    exit 1;
 	}
 }

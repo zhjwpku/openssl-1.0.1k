@@ -1290,3 +1290,13 @@ kisa 1 6                : SEED-OFB      : seed-ofb
 			: AES-128-CBC-HMAC-SHA1		: aes-128-cbc-hmac-sha1
 			: AES-192-CBC-HMAC-SHA1		: aes-192-cbc-hmac-sha1
 			: AES-256-CBC-HMAC-SHA1		: aes-256-cbc-hmac-sha1
+
+member-body 156 197 1	: SM
+SM 401			: SM3           : sm3
+SM 104 1		: SM4-ECB		: sm4-ecb
+SM 104 2		: SM4-CBC		: sm4-cbc
+!Cname sm4-cfb128
+SM 104 3		: SM4-CFB		: sm4-cfb
+!Cname sm4-ofb128
+SM 104 4		: SM4-OFB		: sm4-ofb
+

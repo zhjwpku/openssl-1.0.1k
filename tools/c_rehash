@@ -6,8 +6,8 @@
 
 my $openssl;
 
-my $dir = "/usr/local/ssl";
-my $prefix = "/usr/local/ssl";
+my $dir = "/home/hunter/fakeroot/openssl";
+my $prefix = "/home/hunter/fakeroot";
 
 if(defined $ENV{OPENSSL}) {
 	$openssl = $ENV{OPENSSL};
@@ -75,14 +75,18 @@ sub hash_dir {
 		}
 	}
 	closedir DIR;
-	FILE: foreach $fname (grep {/\.pem$/} @flist) {
+	FILE: foreach $fname (grep {/\.pem$|\.crt$/} @flist) {
 		# Check to see if certificates and/or CRLs present.
 		my ($cert, $crl) = check_file($fname);
 		if(!$cert && !$crl) {
-			print STDERR "WARNING: $fname does not contain a certificate or CRL: skipping\n";
-			next;
+			($cert, $crl) = check_file("$openssl x509 -in \"$fname\" -inform der  -outform pem | ");
+			if(!$cert && !$crl) {
+				print STDERR "WARNING: $fname does not contain a certificate or CRL: skipping\n";
+				next;
+			}
 		}
 		link_hash_cert($fname) if($cert);
+		link_hash_cert_old($fname) if($cert);
 		link_hash_crl($fname) if($crl);
 	}
 }
@@ -116,8 +120,9 @@ sub check_file {
 
 sub link_hash_cert {
 		my $fname = $_[0];
+		my $hashopt = $_[1] || '-subject_hash';
 		$fname =~ s/'/'\\''/g;
-		my ($hash, $fprint) = `"$openssl" x509 -hash -fingerprint -noout -in "$fname"`;
+		my ($hash, $fprint) = `"$openssl" x509 $hashopt -fingerprint -noout -in "$fname"`;
 		chomp $hash;
 		chomp $fprint;
 		$fprint =~ s/^.*=//;
@@ -147,12 +152,19 @@ sub link_hash_cert {
 		$hashlist{$hash} = $fprint;
 }
 
+sub link_hash_cert_old {
+		link_hash_cert($_[0], '-subject_hash_old');
+}
+
 # Same as above except for a CRL. CRL links are of the form <hash>.r<n>
 
 sub link_hash_crl {
 		my $fname = $_[0];
 		$fname =~ s/'/'\\''/g;
 		my ($hash, $fprint) = `"$openssl" crl -hash -fingerprint -noout -in '$fname'`;
+		if(!$hash || !fprint) {
+			($hash, $fprint) = `"$openssl" crl -hash -fingerprint -noout -in '$fname' -inform der`;
+		}
 		chomp $hash;
 		chomp $fprint;
 		$fprint =~ s/^.*=//;

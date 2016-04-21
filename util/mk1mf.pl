@@ -102,7 +102,7 @@ and [options] can be one of
 	no-md2 no-md4 no-md5 no-sha no-mdc2	- Skip this digest
 	no-ripemd
 	no-rc2 no-rc4 no-rc5 no-idea no-des     - Skip this symetric cipher
-	no-bf no-cast no-aes no-camellia no-seed
+	no-bf no-cast no-aes no-camellia no-seed no-sm4
 	no-rsa no-dsa no-dh			- Skip this public key cipher
 	no-ssl2 no-ssl3				- Skip this version of SSL
 	just-ssl				- remove all non-ssl keys/digest
@@ -245,6 +245,7 @@ $cflags= "$xcflags$cflags" if $xcflags ne "";
 
 $cflags.=" -DOPENSSL_NO_IDEA" if $no_idea;
 $cflags.=" -DOPENSSL_NO_AES"  if $no_aes;
+$cflags.=" -DOPENSSL_NO_SM4"  if $no_sm4;
 $cflags.=" -DOPENSSL_NO_CAMELLIA"  if $no_camellia;
 $cflags.=" -DOPENSSL_NO_SEED" if $no_seed;
 $cflags.=" -DOPENSSL_NO_RC2"  if $no_rc2;
@@ -766,6 +767,7 @@ sub var_add
 	return("") if $no_hw   && $dir =~ /\/hw/;
 	return("") if $no_idea && $dir =~ /\/idea/;
 	return("") if $no_aes  && $dir =~ /\/aes/;
+	return("") if $no_sm4  && $dir =~ /\/sm4/;
 	return("") if $no_camellia  && $dir =~ /\/camellia/;
 	return("") if $no_seed && $dir =~ /\/seed/;
 	return("") if $no_rc2  && $dir =~ /\/rc2/;
@@ -1089,6 +1091,7 @@ sub read_options
 		"no-rc5" => \$no_rc5,
 		"no-idea" => \$no_idea,
 		"no-aes" => \$no_aes,
+		"no-sm4" => \$no_sm4,
 		"no-camellia" => \$no_camellia,
 		"no-seed" => \$no_seed,
 		"no-des" => \$no_des,

@@ -275,6 +275,7 @@ $ LIB_ENGINE = "eng_err,eng_lib,eng_list,eng_init,eng_ctrl,"+ -
 	"eng_rsax,eng_rdrand"
 $ LIB_AES = "aes_misc,aes_ecb,aes_cfb,aes_ofb,aes_ctr,aes_ige,aes_wrap,"+ -
 	"aes_core,aes_cbc"
+$ LIB_SM4 = "sm4,sm4_ecb,sm4_cbc,sm4_cfb,sm4_ofb"
 $ LIB_BUFFER = "buffer,buf_str,buf_err"
 $ LIB_BIO = "bio_lib,bio_cb,bio_err,"+ -
 	"bss_mem,bss_null,bss_fd,"+ -
@@ -290,7 +291,7 @@ $ LIB_RAND = "md_rand,randfile,rand_lib,rand_err,rand_egd,"+ -
 $ LIB_ERR = "err,err_all,err_prn"
 $ LIB_EVP = "encode,digest,evp_enc,evp_key,evp_acnf,evp_cnf,"+ -
 	"e_des,e_bf,e_idea,e_des3,e_camellia,"+ -
-	"e_rc4,e_aes,names,e_seed,"+ -
+	"e_rc4,e_aes,e_sm4,names,e_seed,"+ -
 	"e_xcbc_d,e_rc2,e_cast,e_rc5"
 $ LIB_EVP_2 = "m_null,m_md2,m_md4,m_md5,m_sha,m_sha1,m_wp," + -
 	"m_dss,m_dss1,m_mdc2,m_ripemd,m_ecdsa,"+ -
@@ -369,7 +370,7 @@ $ ! Disable the DOLLARID warning.  Not needed with /STANDARD=RELAXED.
 $ COMPILEWITH_CC4 = "" !!! ",a_utctm,bss_log,o_time,o_dir,"
 $ ! Disable disjoint optimization on VAX with DECC.
 $ COMPILEWITH_CC5 = ",md2_dgst,md4_dgst,md5_dgst,mdc2dgst," + -
-                    "seed,sha_dgst,sha1dgst,rmd_dgst,bf_enc,"
+                    "seed,sha_dgst,sha1dgst,sm4,rmd_dgst,bf_enc,"
 $ ! Disable the MIXLINKAGE warning.
 $ COMPILEWITH_CC6 = "" !!! ",enc_read,set_key,"
 $!

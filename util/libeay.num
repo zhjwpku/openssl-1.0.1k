@@ -4313,3 +4313,15 @@ BIO_dgram_sctp_wait_for_dry             4679	EXIST::FUNCTION:SCTP
 BIO_s_datagram_sctp                     4680	EXIST::FUNCTION:DGRAM,SCTP
 BIO_dgram_is_sctp                       4681	EXIST::FUNCTION:SCTP
 BIO_dgram_sctp_notification_cb          4682	EXIST::FUNCTION:SCTP
+
+SM4_cbc_encrypt					        4683	EXIST::FUNCTION:
+SM4_ofb128_encrypt					    4684	EXIST::FUNCTION:
+SM4_ecb_encrypt						    4685	EXIST::FUNCTION:
+SM4_cfb128_encrypt					    4686	EXIST::FUNCTION:
+SM4_encrypt							    4687	EXIST::FUNCTION:
+SM4_set_encrypt_key						4688	EXIST::FUNCTION:
+SM4_set_decrypt_key						4689	EXIST::FUNCTION:
+EVP_sm4_ofb						        4690	EXIST::FUNCTION:SM4
+EVP_sm4_ecb						        4691	EXIST::FUNCTION:SM4
+EVP_sm4_cfb						        4692	EXIST::FUNCTION:SM4
+EVP_sm4_cbc						        4692	EXIST::FUNCTION:SM4
