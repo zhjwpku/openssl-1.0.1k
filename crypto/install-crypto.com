@@ -81,7 +81,7 @@ $ sdirs := , -
    buffer, bio, stack, lhash, rand, err, -
    evp, asn1, pem, x509, x509v3, conf, txt_db, pkcs7, pkcs12, comp, ocsp, -
    ui, krb5, -
-   cms, pqueue, ts, jpake, srp, store, cmac, sm4
+   cms, pqueue, ts, jpake, srp, store, cmac, sm4, sm3
 $!
 $ exheader_ := crypto.h, opensslv.h, ebcdic.h, symhacks.h, ossl_typ.h
 $ exheader_'archd' := opensslconf.h
@@ -96,7 +96,8 @@ $ exheader_ripemd := ripemd.h
 $ exheader_whrlpool := whrlpool.h
 $ exheader_des := des.h, des_old.h
 $ exheader_aes := aes.h
-$ exheader_aes := sm4.h
+$ exheader_sm4 := sm4.h
+$ exheader_sm3 := sm3.h
 $ exheader_rc2 := rc2.h
 $ exheader_rc4 := rc4.h
 $ exheader_rc5 := rc5.h

@@ -4324,4 +4324,11 @@ SM4_set_decrypt_key						4689	EXIST::FUNCTION:
 EVP_sm4_ofb						        4690	EXIST::FUNCTION:SM4
 EVP_sm4_ecb						        4691	EXIST::FUNCTION:SM4
 EVP_sm4_cfb						        4692	EXIST::FUNCTION:SM4
-EVP_sm4_cbc						        4692	EXIST::FUNCTION:SM4
+EVP_sm4_cbc						        4693	EXIST::FUNCTION:SM4
+
+sm3_update								4694	EXIST::FUNCTION:
+sm3_compress							4695	EXIST::FUNCTION:
+sm3_final								4696	EXIST::FUNCTION:
+sm3_init								4697	EXIST::FUNCTION:
+sm3										4698	EXIST::FUNCTION:
+EVP_sm3									4699	EXIST::FUNCTION:SM3

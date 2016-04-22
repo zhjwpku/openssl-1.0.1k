@@ -100,7 +100,7 @@ foreach (@ARGV)
 		print STDERR <<"EOF";
 and [options] can be one of
 	no-md2 no-md4 no-md5 no-sha no-mdc2	- Skip this digest
-	no-ripemd
+	no-ripemd no-sm3
 	no-rc2 no-rc4 no-rc5 no-idea no-des     - Skip this symetric cipher
 	no-bf no-cast no-aes no-camellia no-seed no-sm4
 	no-rsa no-dsa no-dh			- Skip this public key cipher
@@ -255,6 +255,7 @@ $cflags.=" -DOPENSSL_NO_MD2"  if $no_md2;
 $cflags.=" -DOPENSSL_NO_MD4"  if $no_md4;
 $cflags.=" -DOPENSSL_NO_MD5"  if $no_md5;
 $cflags.=" -DOPENSSL_NO_SHA"  if $no_sha;
+$cflags.=" -DOPENSSL_NO_SM3"  if $no_sm3;
 $cflags.=" -DOPENSSL_NO_SHA1" if $no_sha1;
 $cflags.=" -DOPENSSL_NO_RIPEMD" if $no_ripemd;
 $cflags.=" -DOPENSSL_NO_MDC2" if $no_mdc2;
@@ -819,6 +820,7 @@ sub var_add
 	@a=grep(!/(^md4)|(_md4$)/,@a) if $no_md4;
 	@a=grep(!/(^md5)|(_md5$)/,@a) if $no_md5;
 	@a=grep(!/(rmd)|(ripemd)/,@a) if $no_ripemd;
+	@a=grep(!/(^sm3)|(_sm3$)/,@a) if $no_sm3;
 
 	@a=grep(!/(^d2i_r_)|(^i2d_r_)/,@a) if $no_rsa;
 	@a=grep(!/(^p_open$)|(^p_seal$)/,@a) if $no_rsa;
@@ -1092,6 +1094,7 @@ sub read_options
 		"no-idea" => \$no_idea,
 		"no-aes" => \$no_aes,
 		"no-sm4" => \$no_sm4,
+		"no-sm3" => \$no_sm3,
 		"no-camellia" => \$no_camellia,
 		"no-seed" => \$no_seed,
 		"no-des" => \$no_des,

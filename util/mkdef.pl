@@ -970,6 +970,7 @@ sub do_defs
 			$a .= ",RC5" if($s =~ /EVP_rc5/);
 			$a .= ",RIPEMD" if($s =~ /EVP_ripemd/);
 			$a .= ",SHA" if($s =~ /EVP_sha/);
+			$a .= ",SM3" if($s =~ /EVP_sm3/);
 			$a .= ",RSA" if($s =~ /EVP_(Open|Seal)(Final|Init)/);
 			$a .= ",RSA" if($s =~ /PEM_Seal(Final|Init|Update)/);
 			$a .= ",RSA" if($s =~ /RSAPrivateKey/);
@@ -1192,6 +1193,7 @@ sub is_valid
 			if ($keyword eq "HMAC" && $no_hmac) { return 0; }
 			if ($keyword eq "AES" && $no_aes) { return 0; }
 			if ($keyword eq "SM4" && $no_sm4) { return 0; }
+			if ($keyword eq "SM3" && $no_sm3) { return 0; }
 			if ($keyword eq "CAMELLIA" && $no_camellia) { return 0; }
 			if ($keyword eq "SEED" && $no_seed) { return 0; }
 			if ($keyword eq "EVP" && $no_evp) { return 0; }

@@ -734,6 +734,7 @@ $ EXHEADER_RIPEMD := ripemd.h
 $ EXHEADER_WHRLPOOL := whrlpool.h
 $ EXHEADER_DES := des.h, des_old.h
 $ EXHEADER_AES := aes.h
+$ EXHEADER_SM4 := sm4.h
 $ EXHEADER_RC2 := rc2.h
 $ EXHEADER_RC4 := rc4.h
 $ EXHEADER_RC5 := rc5.h

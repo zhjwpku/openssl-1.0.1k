@@ -229,6 +229,6 @@ void OpenSSL_add_all_ciphers(void)
 #endif
 	EVP_add_cipher(EVP_sm4_ecb());
 	EVP_add_cipher(EVP_sm4_cbc());
-	EVP_add_cipher(EVP_sm4_cfb128());
+	EVP_add_cipher(EVP_sm4_cfb());
 	EVP_add_cipher(EVP_sm4_ofb());
 	}

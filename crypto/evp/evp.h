@@ -782,8 +782,11 @@ const EVP_CIPHER *EVP_rc5_32_12_16_ofb(void);
 
 const EVP_CIPHER *EVP_sm4_ecb(void);
 const EVP_CIPHER *EVP_sm4_cbc(void);
-const EVP_CIPHER *EVP_sm4_cfb(void);
+const EVP_CIPHER *EVP_sm4_cfb128(void);
 const EVP_CIPHER *EVP_sm4_ofb(void);
+#define EVP_sm4_cfb	EVP_sm4_cfb128
+
+const EVP_MD *EVP_sm3(void);
 
 #ifndef OPENSSL_NO_AES
 const EVP_CIPHER *EVP_aes_128_ecb(void);
