@@ -4,7 +4,6 @@
 #include "byteorder.h"
 #include <string.h>
 
-
 int sm3_init(sm3_ctx_t *ctx)
 {
 	ctx->digest[0] = 0x7380166F;
@@ -54,13 +53,13 @@ int sm3_update(sm3_ctx_t *ctx, const unsigned char* data, size_t data_len)
 
 int sm3_final(sm3_ctx_t *ctx, unsigned char *digest)
 {
-        if(ctx == NULL) return 0;
+	if(ctx == NULL) return 0;
 	int i;
 	uint32_t *pdigest = (uint32_t *)digest;
 	uint32_t *count = (uint32_t *)(ctx->block + SM3_BLOCK_SIZE - 8);
-		
+
 	ctx->block[ctx->num] = 0x80;
-	
+
 	if (ctx->num + 9 <= SM3_BLOCK_SIZE) {
 		memset(ctx->block + ctx->num + 1, 0, SM3_BLOCK_SIZE - ctx->num - 9);
 	} else {
@@ -71,12 +70,13 @@ int sm3_final(sm3_ctx_t *ctx, unsigned char *digest)
 
 	count[0] = cpu_to_be32((ctx->nblocks) >> 23);
 	count[1] = cpu_to_be32((ctx->nblocks << 9) + (ctx->num << 3));
-	
+
 	sm3_compress(ctx->digest, ctx->block);
 	for (i = 0; i < sizeof(ctx->digest)/sizeof(ctx->digest[0]); i++) {
 		pdigest[i] = cpu_to_be32(ctx->digest[i]);
 	}
-        return 1;
+
+	return 1;
 }
 
 #define ROTATELEFT(X,n)  (((X)<<(n)) | ((X)>>(32-(n))))
@@ -90,13 +90,12 @@ int sm3_final(sm3_ctx_t *ctx, unsigned char *digest)
 #define GG0(x,y,z) ( (x) ^ (y) ^ (z)) 
 #define GG1(x,y,z) (((x) & (y)) | ( (~(x)) & (z)) )
 
-
 void sm3_compress(uint32_t digest[8], const unsigned char block[64])
 {
 	int j;
 	uint32_t W[68], W1[64];
 	const uint32_t *pblock = (const uint32_t *)block;
-	
+
 	uint32_t A = digest[0];
 	uint32_t B = digest[1];
 	uint32_t C = digest[2];
@@ -105,22 +104,23 @@ void sm3_compress(uint32_t digest[8], const unsigned char block[64])
 	uint32_t F = digest[5];
 	uint32_t G = digest[6];
 	uint32_t H = digest[7];
-	uint32_t SS1,SS2,TT1,TT2,T[64];
+	uint32_t SS1,SS2,TT1,TT2;
+	uint32_t T0 = 0x79CC4519;
+	uint32_t T1	= 0x7A879D8A;
+
 
 	for (j = 0; j < 16; j++) {
 		W[j] = cpu_to_be32(pblock[j]);
 	}
 	for (j = 16; j < 68; j++) {
-		W[j] = P1( W[j-16] ^ W[j-9] ^ ROTATELEFT(W[j-3],15)) ^ ROTATELEFT(W[j - 13],7 ) ^ W[j-6];;
+		W[j] = P1( W[j-16] ^ W[j-9] ^ ROTATELEFT(W[j-3],15)) ^ ROTATELEFT(W[j - 13],7 ) ^ W[j-6];
 	}
 	for( j = 0; j < 64; j++) {
 		W1[j] = W[j] ^ W[j+4];
 	}
 
 	for(j =0; j < 16; j++) {
-
-		T[j] = 0x79CC4519;
-		SS1 = ROTATELEFT((ROTATELEFT(A,12) + E + ROTATELEFT(T[j],j)), 7); 
+		SS1 = ROTATELEFT((ROTATELEFT(A,12) + E + ROTATELEFT(T0, j)), 7);
 		SS2 = SS1 ^ ROTATELEFT(A,12);
 		TT1 = FF0(A,B,C) + D + SS2 + W1[j];
 		TT2 = GG0(E,F,G) + H + SS1 + W[j];
@@ -135,9 +135,7 @@ void sm3_compress(uint32_t digest[8], const unsigned char block[64])
 	}
 
 	for(j =16; j < 64; j++) {
-
-		T[j] = 0x7A879D8A;
-		SS1 = ROTATELEFT((ROTATELEFT(A,12) + E + ROTATELEFT(T[j],j)), 7); 
+		SS1 = ROTATELEFT((ROTATELEFT(A,12) + E + ROTATELEFT(T1,j)), 7);
 		SS2 = SS1 ^ ROTATELEFT(A,12);
 		TT1 = FF1(A,B,C) + D + SS2 + W1[j];
 		TT2 = GG1(E,F,G) + H + SS1 + W[j];
