@@ -104,7 +104,9 @@ int SSL_library_init(void)
 #ifndef OPENSSL_NO_SEED
 	EVP_add_cipher(EVP_seed_cbc());
 #endif
-  
+
+	EVP_add_cipher(EVP_sm4_cbc());
+
 #ifndef OPENSSL_NO_MD5
 	EVP_add_digest(EVP_md5());
 	EVP_add_digest_alias(SN_md5,"ssl2-md5");
@@ -119,6 +121,7 @@ int SSL_library_init(void)
 	EVP_add_digest(EVP_sha224());
 	EVP_add_digest(EVP_sha256());
 #endif
+	EVP_add_digest(EVP_sm3());
 #ifndef OPENSSL_NO_SHA512
 	EVP_add_digest(EVP_sha384());
 	EVP_add_digest(EVP_sha512());

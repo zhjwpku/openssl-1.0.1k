@@ -24,8 +24,10 @@ static const EVP_MD sm3_md=
 {
         NID_sm3,
         NID_undef,
+		//NID_sha256WithRSAEncryption,
         SM3_DIGEST_LENGTH,
-        0,
+        //0,
+		EVP_MD_FLAG_PKEY_METHOD_SIGNATURE|EVP_MD_FLAG_DIGALGID_ABSENT,
         init,
         update,
         final,

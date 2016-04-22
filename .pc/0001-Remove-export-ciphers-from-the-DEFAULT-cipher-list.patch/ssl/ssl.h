@@ -286,6 +286,7 @@ extern "C" {
 #define SSL_TXT_IDEA		"IDEA"
 #define SSL_TXT_SEED		"SEED"
 #define SSL_TXT_AES128		"AES128"
+#define SSL_TXT_SM4		"SM4"
 #define SSL_TXT_AES256		"AES256"
 #define SSL_TXT_AES		"AES"
 #define SSL_TXT_AES_GCM		"AESGCM"
@@ -300,6 +301,7 @@ extern "C" {
 #define SSL_TXT_GOST89MAC		"GOST89MAC" 
 #define SSL_TXT_SHA256		"SHA256"
 #define SSL_TXT_SHA384		"SHA384"
+#define SSL_TXT_SM3		"SM3"
 
 #define SSL_TXT_SSLV2		"SSLv2"
 #define SSL_TXT_SSLV3		"SSLv3"

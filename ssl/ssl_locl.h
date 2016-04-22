@@ -329,6 +329,7 @@
 #define SSL_SEED		0x00000800L
 #define SSL_AES128GCM		0x00001000L
 #define SSL_AES256GCM		0x00002000L
+#define SSL_SM4			0x00004000L
 
 #define SSL_AES        		(SSL_AES128|SSL_AES256|SSL_AES128GCM|SSL_AES256GCM)
 #define SSL_CAMELLIA		(SSL_CAMELLIA128|SSL_CAMELLIA256)
@@ -342,8 +343,9 @@
 #define SSL_GOST89MAC   0x00000008L
 #define SSL_SHA256		0x00000010L
 #define SSL_SHA384		0x00000020L
+#define SSL_SM3			0x00000040L
 /* Not a real MAC, just an indication it is part of cipher */
-#define SSL_AEAD		0x00000040L
+#define SSL_AEAD		0x00000080L
 
 /* Bits for algorithm_ssl (protocol version) */
 #define SSL_SSLV2		0x00000001UL
@@ -359,11 +361,12 @@
 #define SSL_HANDSHAKE_MAC_GOST94 0x40
 #define SSL_HANDSHAKE_MAC_SHA256 0x80
 #define SSL_HANDSHAKE_MAC_SHA384 0x100
+#define SSL_HANDSHAKE_MAC_SM3 0x200
 #define SSL_HANDSHAKE_MAC_DEFAULT (SSL_HANDSHAKE_MAC_MD5 | SSL_HANDSHAKE_MAC_SHA)
 
 /* When adding new digest in the ssl_ciph.c and increment SSM_MD_NUM_IDX
  * make sure to update this constant too */
-#define SSL_MAX_DIGEST 6
+#define SSL_MAX_DIGEST 7
 
 #define TLS1_PRF_DGST_MASK	(0xff << TLS1_PRF_DGST_SHIFT)
 
